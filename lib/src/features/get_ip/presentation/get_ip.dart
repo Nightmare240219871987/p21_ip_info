@@ -3,11 +3,6 @@ import 'package:p21_ip_info/src/features/ip_details/presentation/info.dart';
 
 // ignore: must_be_immutable
 class GetIp extends StatelessWidget {
-  List<NavigationDestination> destinations = [
-    NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-    NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
-  ];
-
   final TextEditingController _ipCtrl = TextEditingController();
   late BuildContext context;
 
@@ -41,23 +36,13 @@ class GetIp extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: _onDestinationSelected,
-        destinations: destinations,
-      ),
     );
   }
 
-  void _onDestinationSelected(value) {
-    switch (value) {
-      case 0:
-      case 1:
-    }
-  }
-
-  void _onGetInfoPressed() {
-    Navigator.of(
+  void _onGetInfoPressed() async {
+    await Navigator.of(
       context,
     ).push(MaterialPageRoute(builder: (context) => Info(ip: _ipCtrl.text)));
+    _ipCtrl.text = "";
   }
 }

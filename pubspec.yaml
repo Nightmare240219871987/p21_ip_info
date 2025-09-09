@@ -7,9 +7,12 @@ environment:
   sdk: ^3.9.0
 
 dependencies:
+  dart_ping: ^9.0.1
   flutter:
     sdk: flutter
+  flutter_map: ^8.2.1
   http: ^1.5.0
+  latlong2: ^0.9.1
 
 dev_dependencies:
   flutter_test:
