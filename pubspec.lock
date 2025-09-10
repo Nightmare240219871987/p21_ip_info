@@ -147,6 +147,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.20.2"
+  l10n_countries:
+    dependency: transitive
+    description:
+      name: l10n_countries
+      sha256: "1488ec667b177c43bfd282f0dee8a8dd7adc3245971a6b3c645e637f4897cfa9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  l10n_currencies:
+    dependency: transitive
+    description:
+      name: l10n_currencies
+      sha256: ef9bf2d7990a5843b9eb4c1bc6529f9adcfe99c8b3aafa9579e91b6aad116987
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
+  l10n_languages:
+    dependency: transitive
+    description:
+      name: l10n_languages
+      sha256: "1a1d12f57fdca91935701aa449f3a2f4d5f4d134f4dbc67e83bb9faad2a9cf5c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   latlong2:
     dependency: "direct main"
     description:
@@ -315,6 +339,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  sealed_countries:
+    dependency: transitive
+    description:
+      name: sealed_countries
+      sha256: "200954f9a326ed28044297eaef39bd45f11bb05df162bd211678e0040d826da6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
+  sealed_currencies:
+    dependency: transitive
+    description:
+      name: sealed_currencies
+      sha256: c3581a2a9e55ef8b155cf0fc6611f2d36fdd114b0f582a76a1c36431cc6dca9d
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
+  sealed_languages:
+    dependency: transitive
+    description:
+      name: sealed_languages
+      sha256: "1c301e847e2fabc0c8591011aa7aab04424bbba4554647bf029de4dbc91df3e4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -432,6 +480,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  world_flags:
+    dependency: "direct main"
+    description:
+      name: world_flags
+      sha256: f596e5c35c67feb31454814977b757f4302f009ff529f3f8c32b93a950f62427
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.7.0"
   xdg_directories:
     dependency: transitive
     description:
@@ -441,5 +497,5 @@ packages:
     source: hosted
     version: "1.1.0"
 sdks:
-  dart: ">=3.9.0 <4.0.0"
+  dart: ">=3.9.2 <4.0.0"
   flutter: ">=3.29.0"

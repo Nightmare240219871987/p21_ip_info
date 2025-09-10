@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:world_flags/world_flags.dart' as world_flags;
 
 // ignore: must_be_immutable
 class Info extends StatefulWidget {
@@ -18,13 +19,27 @@ class Info extends StatefulWidget {
 class _InfoState extends State<Info> {
   late Future<Map<dynamic, dynamic>> _future;
 
-  Future<String> getIp(String ip) async {
-    final addrs = await InternetAddress.lookup(ip);
+  Future<String> _getIp(String ip) async {
+    final addrs = await InternetAddress.lookup(Uri.parse(ip).host);
     return addrs[0].address;
   }
 
+  world_flags.WorldCountry _getFlag(String code) {
+    late world_flags.WorldCountry wc;
+    for (world_flags.WorldCountry w in world_flags.WorldCountry.list) {
+      if (w.codeShort == code) {
+        wc = w;
+        break;
+      }
+    }
+    return wc;
+  }
+
   Future<Map<dynamic, dynamic>> _getIPInformation() async {
-    final String resolvedIp = await getIp(widget.ip);
+    String resolvedIp = await _getIp(widget.ip);
+    if (resolvedIp == "") {
+      resolvedIp = widget.ip;
+    }
     Uri url = Uri.https("api.ipquery.io", "/$resolvedIp");
     Response response = await get(url);
     return jsonDecode(response.body);
@@ -81,6 +96,7 @@ class _InfoState extends State<Info> {
                                 "IP Addresse",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
+                              Text(Uri.parse(widget.ip).host),
                               Text(snapshot.data!["ip"] ?? ""),
                             ],
                           ),
@@ -141,7 +157,21 @@ class _InfoState extends State<Info> {
                                 "Location",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(snapshot.data!["location"]["country"] ?? ""),
+                              Row(
+                                spacing: 12,
+                                children: [
+                                  Text(
+                                    snapshot.data!["location"]["country"] ?? "",
+                                  ),
+                                  world_flags.CountryFlag.simplified(
+                                    _getFlag(
+                                      snapshot
+                                          .data!["location"]["country_code"],
+                                    ),
+                                    height: 14,
+                                  ),
+                                ],
+                              ),
                               Text(
                                 snapshot.data!["location"]["country_code"] ??
                                     "",
