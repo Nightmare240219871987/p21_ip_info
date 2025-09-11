@@ -81,8 +81,9 @@ class _GetIpState extends State<GetIp> {
                 itemCount: SharedPrefs().getHistory().length,
                 itemBuilder: (context, index) {
                   return GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(
+                    onTap: () async {
+                      Navigator.of(context).pop();
+                      await Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
                               Info(ip: SharedPrefs().getHistory()[index]),
