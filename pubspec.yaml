@@ -13,6 +13,7 @@ dependencies:
   flutter_map: ^8.2.1
   http: ^1.5.0
   latlong2: ^0.9.1
+  shared_preferences: ^2.5.3
   world_flags: ^2.7.0
 
 dev_dependencies:

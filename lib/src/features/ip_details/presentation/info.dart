@@ -20,8 +20,21 @@ class _InfoState extends State<Info> {
   late Future<Map<dynamic, dynamic>> _future;
 
   Future<String> _getIp(String ip) async {
-    final addrs = await InternetAddress.lookup(Uri.parse(ip).host);
-    return addrs[0].address;
+    InternetAddress? test = InternetAddress.tryParse(ip);
+
+    if (test == null) {
+      String hostname;
+      if (ip.toLowerCase().startsWith("http://") ||
+          ip.toLowerCase().startsWith("https://")) {
+        hostname = Uri.parse(ip).host;
+      } else {
+        hostname = ip;
+      }
+
+      List<InternetAddress> addrs = await InternetAddress.lookup(hostname);
+      return addrs[0].address;
+    }
+    return ip;
   }
 
   world_flags.WorldCountry _getFlag(String code) {
@@ -96,7 +109,7 @@ class _InfoState extends State<Info> {
                                 "IP Addresse",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              Text(Uri.parse(widget.ip).host),
+                              Text(widget.ip),
                               Text(snapshot.data!["ip"] ?? ""),
                             ],
                           ),
@@ -251,9 +264,12 @@ class _InfoState extends State<Info> {
                     snapshot.hasError) {
                   return Column(
                     mainAxisSize: MainAxisSize.min,
+                    spacing: 8,
                     children: [
+                      Icon(Icons.error, size: 38, color: Colors.red),
                       Text(
-                        "Es ist ein Fehler aufgetreten :(${snapshot.error})",
+                        "Fehler : falsche Eingabe, Geben sie eine Gültige IP oder Hostname ein.",
+                        textAlign: TextAlign.center,
                       ),
                     ],
                   );
